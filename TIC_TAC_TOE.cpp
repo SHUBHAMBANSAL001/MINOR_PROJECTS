@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 #include<conio.h>
-// ############## function to display matrix################# //
+// ############## function to display matrix################# //.00
 void show_matrix(char matrix[][3])
 {
 	cout<<endl<<"|";
@@ -131,8 +131,9 @@ int main()
  char matrix[3][3]={'1','2','3','4','5','6','7','8','9'};
   cout<<"        TIC - TAC - TOE          ";
   show_matrix(matrix);
+ 
   cout<<"PLAYER1 (X)  ------------ PLAYER2(O)| \n";
-  int l=1;//for the number of turns of the game
+  int l=1,posint;//for the number of turns of the game
   char pos;
   char array[9];
   int p=0,flag,count=0;
@@ -150,21 +151,33 @@ while(l<10) //At max the number of turns in the game will be 9
 		{
 			if( array[p] == pos)
 			{
-				flag=1;	//what to do if it already exists
+				flag=1;	//what to do if value entered is already covered
 			}
 			
-		}		
-	flag=1;	
-    for(i=0;i<3;i++) 
-	{
+		}
+		posint = (int)pos;
+		
+		if(posint/10 == 0)
+		{
+			flag=0;  // if the value entered is more than one digit
+		}
+		else
+		{
+		flag =1;		
+		cin.sync();
+	    }
+	    flag=1;	
+        for(i=0;i<3;i++) 
+	    {
 		for(j=0;j<3;j++)
 		{
 		 if(matrix[i][j]== pos)
 		 {
-		 	flag = 0;
+		 	flag = 0; // What to do if the value entered is not in the array
 		 }
 		}
-	 }		
+	    }		
+		
 		if (flag == 1)
 		{
 			system("cls");
@@ -175,13 +188,15 @@ while(l<10) //At max the number of turns in the game will be 9
 			cout<<"PLAYER1 ENTER YOUR NUMBER POSITION again (previous entry against the rules)  ";
 			cin>>pos;
 	        flag = 0;
+	        cin.sync();
 		}
 		else
 		{
 		array[count]=pos;
 		count++; 
 	    break;
-		} 
+		}
+	    
     }
 	for(i=0;i<3;i++)
 	{
@@ -209,7 +224,18 @@ while(l<10) //At max the number of turns in the game will be 9
 			}
 			
 		}
-	    flag=1;	
+	    
+		if(posint/10 == 0)
+		{
+			flag=0;  // if the value entered is more than one digit
+		}
+		else
+		{
+		flag =1;		
+		cin.sync();
+	    }
+
+		flag=1;	
         for(i=0;i<3;i++) 
 	    {
 		 for(j=0;j<3;j++)
@@ -229,6 +255,7 @@ while(l<10) //At max the number of turns in the game will be 9
  
 			cout<<"PLAYER2 ENTER YOUR NUMBER POSITION  again (previous entry against the rules) ";
 			cin>>pos;
+			cin.sync();
 			flag=0;
 		}
 		else
@@ -237,6 +264,7 @@ while(l<10) //At max the number of turns in the game will be 9
 	    count++;
 		break; 
 	    }
+	    
     }
 	for(i=0;i<3;i++) //For feeding the positon entered by the second player
 	{
@@ -254,5 +282,10 @@ while(l<10) //At max the number of turns in the game will be 9
    check(matrix);
    l++;
 }
+
 return 0;
 }
+
+// ###################################### END OF PROJECT .. CREATED BY PUNISHER ####################################
+
+
